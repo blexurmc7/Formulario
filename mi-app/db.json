@@ -1,0 +1,15 @@
+{
+  "personas": [
+    {
+      "tipoDoc": "CC",
+      "numDoc": "1035976500",
+      "nombres": "alejandro",
+      "apellidos": "ruiz garcia",
+      "correo": "alejilloruiz100@hotmail.com",
+      "direccion": "cra 65 A#70 A sur 35",
+      "ciudad": "Medellin",
+      "id": "6IZoisXwHDI"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
