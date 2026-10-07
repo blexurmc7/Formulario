@@ -1,36 +1,26 @@
-const usuarioService = require('../services/usuario.service');
+const service = require('../services/usuario.service');
 
-exports.getAll = (req, res) => {
-  usuarioService.getAll((err, results) => {
-    if (err) return res.status(500).json(err);
-    res.json(results);
-  });
+exports.getAll = async (req, res) => {
+    const data = await service.getAll();
+    res.json(data);
 };
 
-exports.getById = (req, res) => {
-  usuarioService.getById(req.params.id, (err, results) => {
-    if (err) return res.status(500).json(err);
-    res.json(results[0]);
-  });
+exports.getById = async (req, res) => {
+    const data = await service.getById(req.params.id);
+    res.json(data);
 };
 
-exports.create = (req, res) => {
-  usuarioService.create(req.body, (err, result) => {
-    if (err) return res.status(500).json(err);
-    res.json({ id: result.insertId, ...req.body });
-  });
+exports.create = async (req, res) => {
+    const data = await service.create(req.body);
+    res.json(data);
 };
 
-exports.update = (req, res) => {
-  usuarioService.update(req.params.id, req.body, (err) => {
-    if (err) return res.status(500).json(err);
-    res.json({ mensaje: 'Usuario actualizado' });
-  });
+exports.update = async (req, res) => {
+    const data = await service.update(req.params.id, req.body);
+    res.json(data);
 };
 
-exports.delete = (req, res) => {
-  usuarioService.delete(req.params.id, (err) => {
-    if (err) return res.status(500).json(err);
-    res.json({ mensaje: 'Usuario eliminado' });
-  });
+exports.delete = async (req, res) => {
+    const data = await service.delete(req.params.id);
+    res.json(data);
 };

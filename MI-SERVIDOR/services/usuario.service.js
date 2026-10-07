@@ -1,11 +1,27 @@
-const usuarioModel = require('../models/usuario.model');
+const Usuario = require('../models/usuario.model');
 
-exports.getAll = (cb) => usuarioModel.getAll(cb);
+exports.getAll = async () => {
+    return await Usuario.findAll();
+};
 
-exports.getById = (id, cb) => usuarioModel.getById(id, cb);
+exports.getById = async (id) => {
+    return await Usuario.findByPk(id);
+};
 
-exports.create = (usuario, cb) => usuarioModel.create(usuario, cb);
+exports.create = async (data) => {
+    return await Usuario.create(data);
+};
 
-exports.update = (id, usuario, cb) => usuarioModel.update(id, usuario, cb);
+exports.update = async (id, data) => {
+    const usuario = await Usuario.findByPk(id);
+    if (!usuario) return null;
 
-exports.delete = (id, cb) => usuarioModel.delete(id, cb);
+    return await usuario.update(data);
+};
+
+exports.delete = async (id) => {
+    const usuario = await Usuario.findByPk(id);
+    if (!usuario) return null;
+
+    await usuario.destroy();
+};

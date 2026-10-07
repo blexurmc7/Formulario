@@ -1,14 +1,17 @@
 const express = require('express');
 const cors = require('cors');
 const app = express();
+const sequelize = require('./config/database');
 
-app.use(cors()); // Habilita las peticiones desde el frontend de React
+app.use(cors());
 app.use(express.json());
 
-const usuarioRoutes = require('./routes/usuario.routes');
+const routes = require('./routes/usuario.routes');
+app.use('/usuarios', routes);
 
-app.use('/usuarios', usuarioRoutes);
-
-app.listen(3000, () => {
-  console.log('Servidor backend corriendo en http://localhost:3000');
+sequelize.sync().then(() => {
+    console.log('BD conectada');
+    app.listen(3000, () => {
+        console.log('Servidor en puerto 3000');
+    });
 });
